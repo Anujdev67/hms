@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.spring.hms.model.Lab" %>
 <%@ page import="com.spring.hms.model.TestAndScans" %>
+<%@ include file="navbar.jsp" %> <!-- Include navbar here -->
 <!DOCTYPE html>
 <html>
 <head>
