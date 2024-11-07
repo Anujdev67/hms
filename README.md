@@ -22,8 +22,8 @@ Technologies Used
 - Lab Dashboard: After logging in, you will be redirected to the lab dashboard where you can view and manage lab details.
 
 Screenshots
-!Login Page
-!Lab Dashboard
+Login Page
+Lab Dashboard
 
 
 
