@@ -2,10 +2,12 @@ package com.spring.hms.model;
 
 public class TestAndScans {
     private Long id;
-    private String type;
+    private String testName;   // Changed from type to testName
     private String description;
+    private String status;
     private boolean deleted = false; // For soft delete
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -14,12 +16,12 @@ public class TestAndScans {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getTestName() {
+        return testName;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTestName(String testName) {
+        this.testName = testName;
     }
 
     public String getDescription() {
@@ -28,6 +30,14 @@ public class TestAndScans {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public boolean isDeleted() {

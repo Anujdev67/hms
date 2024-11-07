@@ -20,6 +20,7 @@ public class LabController {
     private LabService labService;
     @Autowired 
     private TestAndScansService testAndScansService;
+
     @GetMapping("/")
     public String showLogin() {
         return "login";
@@ -35,6 +36,11 @@ public class LabController {
                 session.setAttribute("username", username);
                 List<Lab> labs = labService.findAll();
                 req.setAttribute("listLabs", labs);
+
+                // Add test and scans to request
+                List<TestAndScans> tests = testAndScansService.findAll();
+                req.setAttribute("listTests", tests);
+
                 return "lab_dashboard";
             } else {
                 throw new InvalidCredentialsException("Invalid username or password");
@@ -49,6 +55,11 @@ public class LabController {
     public String goToLabDashboard(HttpServletRequest req, HttpSession session) {
         List<Lab> labs = labService.findAll();
         req.setAttribute("listLabs", labs);
+
+        // Add test and scans to request
+        List<TestAndScans> tests = testAndScansService.findAll();
+        req.setAttribute("listTests", tests);
+
         return "lab_dashboard";
     }
 
@@ -74,23 +85,27 @@ public class LabController {
         labService.softDelete(id);
         return "redirect:/lab-dashboard";
     }
+
     @PostMapping("/add-test") 
     public String addTest(HttpServletRequest req) { 
-    	String type = req.getParameter("type"); 
-    	String description = req.getParameter("description"); 
-    	TestAndScans test = new TestAndScans(); test.setType(type); 
-    	test.setDescription(description); 
-    	testAndScansService.save(test); 
-    return "redirect:/lab-dashboard";
+        String testName = req.getParameter("test_name");
+        String description = req.getParameter("description");
+        TestAndScans test = new TestAndScans(); 
+        test.setTestName(testName);
+        test.setDescription(description); 
+        testAndScansService.save(test);
+        return "redirect:/lab-dashboard";
     }
+
     @GetMapping("/soft-delete-test") 
     public String softDeleteTest(@RequestParam("id") Long id) { 
-    	testAndScansService.softDelete(id); 
-    	return "redirect:/lab-dashboard";
+        testAndScansService.softDelete(id); 
+        return "redirect:/lab-dashboard";
     }
+
     @GetMapping("/delete-test") 
     public String deleteTest(@RequestParam("id") Long id) { 
-    	testAndScansService.delete(id); 
-    	return "redirect:/lab-dashboard";
+        testAndScansService.delete(id); 
+        return "redirect:/lab-dashboard";
     }
 }

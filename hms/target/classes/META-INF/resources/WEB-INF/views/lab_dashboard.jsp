@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.List" %>
+<%@ page import="com.spring.hms.model.Lab" %>
 <%@ page import="com.spring.hms.model.TestAndScans" %>
 <!DOCTYPE html>
 <html>
@@ -15,32 +16,48 @@
             </div>
         </nav>
         <div class="row mt-4">
+            <div class="col-sm-3"></div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Add New Test
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="/add-test">
+                            <div class="form-group row">
+                                <label for="test_name" class="col-sm-2 col-form-label">Test Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="test_name" name="test_name" placeholder="Test Name" required>
+                                </div>
+                            </div>
+                            <div class="form-group row mt-2">
+                                <label for="description" class="col-sm-2 col-form-label">Description</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="description" name="description" placeholder="Description" required>
+                                </div>
+                            </div>
+                            <input type="submit" value="Add Test" class="btn btn-primary mt-3">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+
+        <div class="row mt-4">
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        Lab Dashboard
+                        Test and Scans
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Add New Test</h5>
-                        <form method="post" action="/add-test">
-                            <div class="form-group">
-                                <label for="type">Type</label>
-                                <input type="text" class="form-control" id="type" name="type" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <input type="text" class="form-control" id="description" name="description" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary mt-3">Add Test</button>
-                        </form>
-                        <hr>
-                        <h5 class="card-title">Tests and Scans</h5>
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Type</th>
+                                    <th>Test Name</th>
                                     <th>Description</th>
-                                    <th>Actions</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -50,8 +67,9 @@
                                         for (TestAndScans test : tests) {
                                 %>
                                 <tr>
-                                    <td><%= test.getType() %></td>
+                                    <td><%= test.getTestName() %></td>
                                     <td><%= test.getDescription() %></td>
+                                    <td><%= test.getStatus() %></td>
                                     <td>
                                         <a href="/soft-delete-test?id=<%= test.getId() %>" class="btn btn-warning btn-sm">Soft Delete</a>
                                         <a href="/delete-test?id=<%= test.getId() %>" class="btn btn-danger btn-sm">Delete</a>
