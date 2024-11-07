@@ -1,4 +1,5 @@
-![image](https://github.com/user-attachments/assets/65b7415a-9087-4de9-ba8d-71b060bb4214)
+![image](https://github.com/user-attachments/assets/90d5d1ba-2fad-4efb-84af-515af178cb91)
+
 
 # LabOperator Module
 
